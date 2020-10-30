@@ -1,0 +1,21 @@
+Package: skillsengine
+Title: A wrapper for the SkillsEngine API
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Daniel",
+           family = "Molitor",
+           role = c("aut", "cre"),
+           email = "molitdj97@gmail.com")
+Description: This package provides a wrapper for the SkillsEngine API and 
+    all corresponding endpoints. It also provides functionality for setting 
+    and retrieving access keys.
+Imports:
+    httr,
+    jsonlite,
+    usethis
+Suggests:
+    testthat
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
