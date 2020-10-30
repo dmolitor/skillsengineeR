@@ -1,4 +1,4 @@
 library(testthat)
-library(skillsengine)
+library(skillsengineeR)
 
-test_check("skillsengine")
+test_check("skillsengineeR")
