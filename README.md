@@ -19,3 +19,55 @@ You can install skillsengineeR with:
 ``` r
 devtools::install_github("https://github.com/dmolitor/skillsengineeR")
 ```
+
+## Setting up API authorization
+
+The first step is either to sign up for [test API access](https://accounts.skillsengine.com/users/sign_up),
+or purchase full API access. Once this is completed, the Client ID and your Client Secret tokens
+should be accessible on the SkillsEngine account portal.
+
+API tokens, and other private authorization tokens, should never be hard-coded into scripts, but rather
+should be accessed securely in scripts. One way to do this is to set them as global variables in the
+.Renviron file. To set this up simply run:
+```r
+set_id_secret()
+#> RStudio will open your .Renviron file in a new tab. Enter your Client ID and Client Secret as described below.
+#> Using the following naming convention is necessary for 'get_id_secret()' to work:
+#>  SKILLSENGINE_CLIENT_ID=<client id>
+#>  SKILLSENGINE_CLIENT_SECRET=<client secret>
+#> * Edit 'C:/Users/DanielMolitor/Documents/.Renviron'
+#> * Restart R for changes to take effect
+#> 
+#> Restart your R Session!
+```
+The format of the variables in the .Renviron file should look like this:
+![setting client keys](./pictures/set_id_secret.png)
+
+Once the Client ID and Secret have been set in .Renviron, they can be accessed like so:
+```r
+client <- get_id_secret()
+client_id <- client$id
+client_secret <- client$secret
+```
+
+To obtain the authorization token, which is necessary for every SkillsEngine API endpoint,
+simply run:
+```r
+token <- get_access_token(client_id, client_secret)
+#> Valid request
+```
+
+To confirm that the authorization token is valid, run
+```r
+test_access(token)
+#> [1] "Token is authorized"
+```
+
+To check the data version, run
+```r
+freshness_tag <- freshness(token)
+#> Valid request
+freshness_tag
+#> [1] "2bf95b60aed242dc12d283bf19fc0b9e"
+```
+The freshness tag can be stored and checked periodically to ensure that data is still fully up-to-date.
