@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/dmolitor/skillsengineeR.svg?branch=master)](https://travis-ci.com/dmolitor/skillsengineeR)
+[![Github All Releases](https://img.shields.io/github/downloads/dmolitor/skillsengineeR/total.svg)]()
 <!-- badges: end -->
 
 The goal of skillsengineeR is to provide a convenient wrapper around the 
