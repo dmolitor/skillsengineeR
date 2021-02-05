@@ -40,8 +40,6 @@ devtools::install_github("https://github.com/dmolitor/skillsengineeR")
   #> 
   #> Restart your R Session!
   ```
-  The format of the variables in the .Renviron file should look like this:
-  ![setting client keys](./pictures/set_id_secret.PNG)
 
 - Access the Client ID and Secret set in .Renviron
   ```r
