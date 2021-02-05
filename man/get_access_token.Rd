@@ -4,14 +4,14 @@
 \alias{get_access_token}
 \title{Get SkillsEngine Access Token}
 \usage{
-get_access_token(client_id, client_secret, shush = FALSE)
+get_access_token(client_id, client_secret, handle_status = "warn")
 }
 \arguments{
-\item{client_id}{String. Provided by \code{get_id_secret}}
+\item{client_id}{Client ID provided by \code{get_id_secret}, or manually entered}
 
-\item{client_secret}{String. Provided by \code{get_id_secret}}
+\item{client_secret}{Client Secret provided by \code{get_id_secret}, or manually entered}
 
-\item{shush}{Logical. Print query status or not}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
 }
 \description{
 Get SkillsEngine Access Token

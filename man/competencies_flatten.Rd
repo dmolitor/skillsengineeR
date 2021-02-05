@@ -4,25 +4,36 @@
 \alias{competencies_flatten}
 \title{Pull from Competencies Flatten API endpoint.}
 \usage{
-competencies_flatten(text, token, bias = NULL, exclude = NULL, shush = FALSE)
+competencies_flatten(
+  text,
+  token,
+  bias = NULL,
+  exclude = NULL,
+  handle_status = "warn",
+  response_raw = FALSE
+)
 }
 \arguments{
-\item{text}{String. Sentence or text entry used to pull competencies.}
+\item{text}{Sentence or text to pull relevant competencies for}
 
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{bias}{Numeric. Level of bias.}
+\item{bias}{Numeric value defining level of bias (Optional)}
 
-\item{exclude}{Character vector. Vector of result elements to omit.}
+\item{exclude}{Character vector of result elements to omit (Optional)}
 
-\item{shush}{Logical. Print query status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
+
+\item{response_raw}{Logical value whether to return the API response as
+raw, unparsed text. Defaults to \code{FALSE}}
 }
 \description{
 Pull from Competencies Flatten API endpoint.
 }
 \examples{
 \dontrun{
+tkn <- get_access_token(client_id, client_secret)
 txt <- "i am a welder and used welding equipment and acetylene torches"
-c <- competencies_flatten(text = txt, bias = 0.4)
+c <- competencies_flatten(text = txt, token = tkn, bias = 0.4)
 }
 }

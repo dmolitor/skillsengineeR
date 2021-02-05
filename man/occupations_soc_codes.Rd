@@ -2,25 +2,36 @@
 % Please edit documentation in R/get_functions.R
 \name{occupations_soc_codes}
 \alias{occupations_soc_codes}
-\title{Provide economic data related to user-provided SOC codes (by state).}
+\title{Provide economic data related to user-provided SOC codes (by state)}
 \usage{
-occupations_soc_codes(token, soc_codes, state_code = NULL, shush = FALSE)
+occupations_soc_codes(
+  token,
+  soc_codes,
+  state_code = NULL,
+  handle_status = "warn",
+  response_raw = FALSE
+)
 }
 \arguments{
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{soc_codes}{Character vector. SOC codes to pull data for.}
+\item{soc_codes}{Character vector of SOC codes to extract data for}
 
-\item{state_code}{String. State code to get more specific results. (Optional)}
+\item{state_code}{State code string to get regional results (Optional)}
 
-\item{shush}{Logical. Whether to print request status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
+
+\item{response_raw}{Logical value whether to return the API response as
+raw, unparsed text. Defaults to \code{FALSE}}
 }
 \description{
-Provide economic data related to user-provided SOC codes (by state).
+Provide economic data related to user-provided SOC codes (by state)
 }
 \examples{
 \dontrun{
+tkn <- get_access_token(client_id, client_secret)
 o <- occupations_soc_codes(soc_codes = c("13-2011","15-2031","15-2011"),
-                           state_code = "TX")
+                           state_code = "TX",
+                           token = tkn)
 }
 }

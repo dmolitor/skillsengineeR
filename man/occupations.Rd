@@ -4,12 +4,15 @@
 \alias{occupations}
 \title{Pull the full list of occupations}
 \usage{
-occupations(token, shush = FALSE)
+occupations(token, handle_status = "warn", response_raw = FALSE)
 }
 \arguments{
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{shush}{Logical. Whether to print request status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
+
+\item{response_raw}{Logical value whether to return the API response as
+raw, unparsed text. Defaults to \code{FALSE}}
 }
 \description{
 Pull the full list of occupations

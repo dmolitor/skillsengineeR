@@ -31,23 +31,24 @@ get_id_secret <- function(){
 
 #' Get SkillsEngine Access Token
 #'
-#' @param client_id String. Provided by \code{get_id_secret}
-#' @param client_secret String. Provided by \code{get_id_secret}
-#' @param shush Logical. Print query status or not
+#' @param client_id Client ID provided by \code{get_id_secret}, or manually entered
+#' @param client_secret Client Secret provided by \code{get_id_secret}, or manually entered
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @export
 get_access_token <- function(client_id,
                              client_secret,
-                             shush = FALSE){
+                             handle_status = "warn"){
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
   post <- httr::POST(url = "https://api.skillsengine.com/api/token",
                      body = list("grant_type" = "client_credentials",
                                  "client_id" = client_id,
-                                 "client_secret" = client_secret))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request. Status: ", post$status_code, "\n"))
-    }
+                                 "client_secret" = client_secret),
+                     encode = "json")
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   access_token <- httr::content(post)$access_token
   return(access_token)

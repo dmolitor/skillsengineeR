@@ -1,21 +1,29 @@
 #' Pull from Competencies API endpoint.
 #' 
-#' @param text String. Sentence or text entry used to pull competencies.
-#' @param token String. Authorization token.
-#' @param bias Numeric. Level of bias.
-#' @param exclude Character vector. Vector of result elements to omit.
-#' @param shush Logical. Print query status.
+#' @param text Sentence or text to pull relevant competencies for
+#' @param token Authorization token obtained from \code{get_access_token}
+#' @param bias Numeric value defining level of bias (Optional)
+#' @param exclude Character vector of result elements to omit (Optional)
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @param response_raw Logical value whether to return the API response as
+#'   raw, unparsed text. Defaults to \code{FALSE}
 #' @examples
 #' \dontrun{
+#' tkn <- get_access_token(client_id, client_secret)
 #' txt <- "i am a welder and used welding equipment and acetylene torches"
-#' c <- competencies(text = txt, bias = 0.4)
+#' c <- competencies(text = txt, token = tkn, bias = 0.4)
 #' }
 #' @export
 competencies <- function(text,
                          token,
                          bias = NULL,
                          exclude = NULL,
-                         shush = FALSE){
+                         handle_status = "warn",
+                         response_raw = FALSE){
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
+  assert(response_raw %in% c(TRUE, FALSE),
+         "Set response_raw as either TRUE or FALSE")
   elements <- c("metadata",
                 "occupations",
                 "general_work_activities",
@@ -37,15 +45,15 @@ competencies <- function(text,
   post <- httr::POST("https://api.skillsengine.com/v2/competencies/analyze",
                      body = body,
                      httr::add_headers('Authorization' = paste("bearer", 
-                                                               token)))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request. Status: ", post$status_code, "\n"))
-    }
+                                                               token)),
+                     encode = "json")
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   post_content <- httr::content(post, as = "text")
+  if (response_raw) return(post_content)
   post_structured <- jsonlite::fromJSON(post_content, flatten = TRUE)
   out <- post_structured$result$competencies_analysis
   return(out)
@@ -53,22 +61,30 @@ competencies <- function(text,
 
 #' Pull from Competencies Flatten API endpoint.
 #' 
-#' @param text String. Sentence or text entry used to pull competencies.
-#' @param token String. Authorization token.
-#' @param bias Numeric. Level of bias.
-#' @param exclude Character vector. Vector of result elements to omit.
-#' @param shush Logical. Print query status.
+#' @param text Sentence or text to pull relevant competencies for
+#' @param token Authorization token obtained from \code{get_access_token}
+#' @param bias Numeric value defining level of bias (Optional)
+#' @param exclude Character vector of result elements to omit (Optional)
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @param response_raw Logical value whether to return the API response as
+#'   raw, unparsed text. Defaults to \code{FALSE}
 #' @examples
 #' \dontrun{
+#' tkn <- get_access_token(client_id, client_secret)
 #' txt <- "i am a welder and used welding equipment and acetylene torches"
-#' c <- competencies_flatten(text = txt, bias = 0.4)
+#' c <- competencies_flatten(text = txt, token = tkn, bias = 0.4)
 #' }
 #' @export
 competencies_flatten <- function(text,
                                  token,
                                  bias = NULL,
                                  exclude = NULL,
-                                 shush = FALSE){
+                                 handle_status = "warn",
+                                 response_raw = FALSE){
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
+  assert(response_raw %in% c(TRUE, FALSE),
+         "Set response_raw as either TRUE or FALSE")
   elements <- c("metadata",
                 "occupations",
                 "general_work_activities",
@@ -90,15 +106,15 @@ competencies_flatten <- function(text,
   post <- httr::POST("https://api.skillsengine.com/v2/competencies/analyze/flatten",
                      body = body,
                      httr::add_headers('Authorization' = paste("bearer", 
-                                                               token)))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request. Status: ", post$status_code, "\n"))
-    }
+                                                               token)),
+                     encode = "json")
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   post_content <- httr::content(post, as = "text")
+  if (response_raw) return(post_content)
   post_structured <- jsonlite::fromJSON(post_content, flatten = TRUE)
   out <- post_structured$result$competencies_analysis
   return(out)
@@ -106,18 +122,21 @@ competencies_flatten <- function(text,
 
 #' Pull from Competencies Military API endpoint.
 #' 
-#' @param moc String or numeric. MOC to return competencies for.
-#' @param service_branch String. Branch of Armed Forces.
-#' @param mpc String.
-#' @param exclude Character vector. Vector of return elements to exclude.
-#' @param start_date String. Start date of military service.
-#' @param end_date String. End date of military service.
-#' @param moc_status String. Status of MOC.
-#' @param token String. Authorization token.
-#' @param shush Logical. Print query status.
+#' @param moc String or numeric MOC code to return competencies for
+#' @param service_branch Lowercase Branch of Armed Forces string, e.g. 'army' (Optional)
+#' @param mpc String (Optional)
+#' @param exclude Character vector of return elements to exclude (Optional)
+#' @param start_date Start date of military service (Optional)
+#' @param end_date End date of military service (Optional)
+#' @param moc_status Status of MOC (Optional)
+#' @param token Authorization token obtained from \code{get_access_token}
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @param response_raw Logical value whether to return the API response as
+#'   raw, unparsed text. Defaults to \code{FALSE}
 #' @examples
 #' \dontrun{
-#' c <- competencies_military(moc = "2A554E")
+#' tkn <- get_access_token(client_id, client_secret)
+#' c <- competencies_military(moc = "2A554E", token = tkn)
 #' }
 #' @export
 competencies_military <- function(moc,
@@ -128,7 +147,12 @@ competencies_military <- function(moc,
                                   end_date = NULL,
                                   moc_status = NULL,
                                   token,
-                                  shush = FALSE) {
+                                  handle_status = "warn",
+                                  response_raw = FALSE) {
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
+  assert(response_raw %in% c(TRUE, FALSE),
+         "Set response_raw as either TRUE or FALSE")
   branches <- c("navy", 
                 "army", 
                 "coast guard", 
@@ -180,15 +204,15 @@ competencies_military <- function(moc,
   post <- httr::POST("https://api.skillsengine.com/v2/competencies/analyze/military",
                      body = body,
                      httr::add_headers('Authorization' = paste("bearer", 
-                                                               token)))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request. Status: ", post$status_code, "\n"))
-    }
+                                                               token)),
+                     encode = "json")
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   post_content <- httr::content(post, as = "text")
+  if (response_raw) return(post_content)
   post_structured <- jsonlite::fromJSON(post_content, flatten = TRUE)
   out <- post_structured$result$competencies_analysis
   return(out)
@@ -196,19 +220,24 @@ competencies_military <- function(moc,
 
 #' Pull from Skills API endpoint.
 #' 
-#' @param text String. Sentence or text entry used to pull competencies.
-#' @param depth Numeric. Algorithm depth.
-#' @param cutoff Numeric. Cutoff value.
-#' @param socs Character vector. Vector of SOCs to fine-tune search.
-#' @param similarity_scoring String. Whether or not to use similarity scoring.
-#' @param token String. Authorization token.
-#' @param shush Logical. Print query status.
+#' @param text Sentence or text entry to pull competencies for
+#' @param depth Numeric vlaue specifying algorithm depth (Optional)
+#' @param cutoff Numeric cutoff value (Optional)
+#' @param socs Character vector of SOCs to fine-tune search (Optional)
+#' @param similarity_scoring String specifying \code{true} or \code{false} 
+#'   Whether or not to use similarity scoring. (Optional)
+#' @param token Authorization token obtained from \code{get_access_token}
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @param response_raw Logical value whether to return the API response as
+#'   raw, unparsed text. Defaults to \code{FALSE}
 #' @examples 
 #' \dontrun{
+#' tkn <- get_access_token(client_id, client_secret)
 #' txt <- "Provide substance abuse education and counseling for at-risk individuals."
 #' s <- skills(text = txt,
 #'             depth = 20,
 #'             cutoff = 5,
+#'             token = tkn,
 #'             similarity_scoring = "true")
 #' }
 #' @export
@@ -218,7 +247,12 @@ skills <- function(text,
                    socs = NULL,
                    similarity_scoring = NULL,
                    token,
-                   shush = FALSE) {
+                   handle_status = "warn",
+                   response_raw = FALSE) {
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
+  assert(response_raw %in% c(TRUE, FALSE),
+         "Set response_raw as either TRUE or FALSE")
   assert(is.null(similarity_scoring) | 
            all(similarity_scoring %in% c('true', 'false')),
          c("Entry for 'similarity_scoring' is not valid. ",
@@ -237,15 +271,15 @@ skills <- function(text,
   post <- httr::POST("https://api.skillsengine.com/v2/skills/match",
                      body = body,
                      httr::add_headers('Authorization' = paste("bearer", 
-                                                               token)))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request. Status: ", post$status_code, "\n"))
-    }
+                                                               token)),
+                     encode = "json")
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   post_content <- httr::content(post, as = "text")
+  if (response_raw) return(post_content)
   post_structured <- jsonlite::fromJSON(post_content, flatten = TRUE)
   out <- post_structured$result
   return(out)
@@ -253,19 +287,24 @@ skills <- function(text,
 
 #' Pull from Skills Multi-Match API endpoint.
 #' 
-#' @param sentences Character vector. Sentences used to pull competencies.
-#' @param depth Numeric. Algorithm depth.
-#' @param cutoff Numeric. Cutoff value.
-#' @param socs Character vector. Vector of SOCs to fine-tune search.
-#' @param similarity_scoring String. Whether or not to use similarity scoring.
-#' @param token String. Authorization token.
-#' @param shush Logical. Print query status.
+#' @param sentences Character vector of sentences used to pull competencies
+#' @param depth Numeric vlaue specifying algorithm depth (Optional)
+#' @param cutoff Numeric cutoff value (Optional)
+#' @param socs Character vector of SOCs to fine-tune search (Optional)
+#' @param similarity_scoring String specifying \code{true} or \code{false} 
+#'   Whether or not to use similarity scoring. (Optional)
+#' @param token Authorization token obtained from \code{get_access_token}
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @param response_raw Logical value whether to return the API response as
+#'   raw, unparsed text. Defaults to \code{FALSE}
 #' @examples 
 #' \dontrun{
+#' tkn <- get_access_token(client_id, client_secret)
 #' txts <- c("Weld things together", "Use an acetylene torch", "Hammer nails into wood")
 #' s <- skills_multi_match(sentences = txts,
 #'                         depth = 20,
 #'                         cutoff = 5,
+#'                         token = tkn,
 #'                         socs = c("17-2141.00",
 #'                                  "49-9041.00",
 #'                                  "49-1011.00",
@@ -278,7 +317,12 @@ skills_multi_match <- function(sentences,
                                socs = NULL,
                                similarity_scoring = NULL,
                                token,
-                               shush = FALSE) {
+                               handle_status = "warn",
+                               response_raw = FALSE) {
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
+  assert(response_raw %in% c(TRUE, FALSE),
+         "Set response_raw as either TRUE or FALSE")
   assert(is.null(similarity_scoring) |
            all(similarity_scoring %in% c('true', 'false')),
          c("Entry for 'similarity_scoring' is not valid. ",
@@ -299,14 +343,13 @@ skills_multi_match <- function(sentences,
                      encode = "json",
                      httr::add_headers('Authorization' = paste("bearer",
                                                                token)))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request.\n Message: ", httr::content(post), "\n"))
-    }
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   post_content <- httr::content(post, as = "text")
+  if (response_raw) return(post_content)
   post_structured <- jsonlite::fromJSON(post_content, flatten = TRUE)
   out <- post_structured$result$skills
   return(out)
@@ -314,37 +357,45 @@ skills_multi_match <- function(sentences,
 
 #' Pull from Related Topics API endpoint.
 #' 
-#' @param texts Character Vector. Sentences used to pull related topics.
-#' @param socs Character vector. Soc codes to fine-tune related topics.
-#' @param token String. Authorization token.
-#' @param shush Logical. Print query status.
+#' @param texts Character Vector of sentences used to pull related topics
+#' @param socs Character vector of SOC codes to fine-tune related topics (Optional)
+#' @param token Authorization token obtained from \code{get_access_token}
+#' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @param response_raw Logical value whether to return the API response as
+#'   raw, unparsed text. Defaults to \code{FALSE}
 #' @examples 
 #' \dontrun{
+#' tkn <- get_access_token(client_id, client_secret)
 #' t <- topics_related(texts = c("ms word", "access", "dexterity"),
-#'                     socs = "41-3041.00")
+#'                     socs = "41-3041.00",
+#'                     token = tkn)
 #' }
 #' @export
 topics_related <- function(texts,
                            socs = NULL,
                            token,
-                           shush = FALSE){
+                           handle_status = "warn",
+                           response_raw = FALSE){
+  assert(handle_status %in% c("warn", "error"),
+         "Set handle_status as either 'warn' or 'error'")
+  assert(response_raw %in% c(TRUE, FALSE),
+         "Set response_raw as either TRUE or FALSE")
   body <- list(texts = texts)
   if(!is.null(socs)) {
     body <- append(body, list(socs = socs))
   }
   post <- httr::POST("https://api.skillsengine.com/v2/topics/related",
                      body = body,
-                     encode = "json",
                      httr::add_headers("Authorization" = paste("bearer", 
-                                                               token)))
-  if (shush == FALSE) {
-    if (post$status_code == 200) {
-      cat("Valid request\n")
-    } else {
-      cat(paste0("Bad request. Status: ", post$status_code, "\n"))
-    }
+                                                               token)),
+                     encode = "json")
+  if (handle_status == "warn") {
+    httr::warn_for_status(post)
+  } else {
+    httr::stop_for_status(post)
   }
   post_content <- httr::content(post, as = "text")
+  if (response_raw) return(post_content)
   post_structured <- jsonlite::fromJSON(post_content, flatten = TRUE)
   out <- post_structured$result
   return(out)

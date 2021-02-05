@@ -1,13 +1,13 @@
 Package: skillsengineeR
-Title: A wrapper for the SkillsEngine API
-Version: 0.1.0
+Title: A Light-Weight Wrapper for the SkillsEngine API
+Version: 0.2.0
 Authors@R: 
     person(given = "Daniel",
            family = "Molitor",
            role = c("aut", "cre"),
            email = "molitdj97@gmail.com")
-Description: This package provides a wrapper for the SkillsEngine API and 
-    all corresponding endpoints. It also provides functionality for convenient
+Description: Light-weight wrapper surrounding the SkillsEngine Analytics API and 
+    corresponding endpoints. It also provides functionality for convenient
     setting and retrieving of authorization keys.
 Imports:
     httr,

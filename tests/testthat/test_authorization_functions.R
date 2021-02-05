@@ -5,6 +5,10 @@ test_that("authorization functions work", {
   expect_invisible(set_id_secret())
   
   skip("No API keys to run test")
-  expect_is(get_id_secret(), "character")
-  expect_is(get_access_token(), "character")
+  client <- get_id_secret()
+  expect_type(client, "list")
+  expect_equal(length(client), 2)
+  client_id <- get_id_secret()[[1]]
+  client_secret <- get_id_secret()[[2]]
+  expect_is(get_access_token(client_id, client_secret), "character")
 })

@@ -11,33 +11,40 @@ skills_multi_match(
   socs = NULL,
   similarity_scoring = NULL,
   token,
-  shush = FALSE
+  handle_status = "warn",
+  response_raw = FALSE
 )
 }
 \arguments{
-\item{sentences}{Character vector. Sentences used to pull competencies.}
+\item{sentences}{Character vector of sentences used to pull competencies}
 
-\item{depth}{Numeric. Algorithm depth.}
+\item{depth}{Numeric vlaue specifying algorithm depth (Optional)}
 
-\item{cutoff}{Numeric. Cutoff value.}
+\item{cutoff}{Numeric cutoff value (Optional)}
 
-\item{socs}{Character vector. Vector of SOCs to fine-tune search.}
+\item{socs}{Character vector of SOCs to fine-tune search (Optional)}
 
-\item{similarity_scoring}{String. Whether or not to use similarity scoring.}
+\item{similarity_scoring}{String specifying \code{true} or \code{false} 
+Whether or not to use similarity scoring. (Optional)}
 
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{shush}{Logical. Print query status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
+
+\item{response_raw}{Logical value whether to return the API response as
+raw, unparsed text. Defaults to \code{FALSE}}
 }
 \description{
 Pull from Skills Multi-Match API endpoint.
 }
 \examples{
 \dontrun{
+tkn <- get_access_token(client_id, client_secret)
 txts <- c("Weld things together", "Use an acetylene torch", "Hammer nails into wood")
 s <- skills_multi_match(sentences = txts,
                         depth = 20,
                         cutoff = 5,
+                        token = tkn,
                         socs = c("17-2141.00",
                                  "49-9041.00",
                                  "49-1011.00",
