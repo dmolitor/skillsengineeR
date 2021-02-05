@@ -4,10 +4,12 @@
 \alias{test_access}
 \title{Test connection to SkillsEngine API}
 \usage{
-test_access(token)
+test_access(token, handle_status = "warn")
 }
 \arguments{
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
+
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
 }
 \description{
 Test connection to SkillsEngine API

@@ -6,8 +6,8 @@ Authors@R:
            family = "Molitor",
            role = c("aut", "cre"),
            email = "molitdj97@gmail.com")
-Description: Light-weight wrapper surrounding the SkillsEngine API and 
-    all corresponding endpoints. It also provides functionality for convenient
+Description: Light-weight wrapper surrounding the SkillsEngine Analytics API and 
+    corresponding endpoints. It also provides functionality for convenient
     setting and retrieving of authorization keys.
 Imports:
     httr,

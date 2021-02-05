@@ -13,33 +13,38 @@ competencies_military(
   end_date = NULL,
   moc_status = NULL,
   token,
-  shush = FALSE
+  handle_status = "warn",
+  response_raw = FALSE
 )
 }
 \arguments{
-\item{moc}{String or numeric. MOC to return competencies for.}
+\item{moc}{String or numeric MOC code to return competencies for}
 
-\item{service_branch}{String. Branch of Armed Forces.}
+\item{service_branch}{Lowercase Branch of Armed Forces string, e.g. 'army' (Optional)}
 
-\item{mpc}{String.}
+\item{mpc}{String (Optional)}
 
-\item{exclude}{Character vector. Vector of return elements to exclude.}
+\item{exclude}{Character vector of return elements to exclude (Optional)}
 
-\item{start_date}{String. Start date of military service.}
+\item{start_date}{Start date of military service (Optional)}
 
-\item{end_date}{String. End date of military service.}
+\item{end_date}{End date of military service (Optional)}
 
-\item{moc_status}{String. Status of MOC.}
+\item{moc_status}{Status of MOC (Optional)}
 
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{shush}{Logical. Print query status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
+
+\item{response_raw}{Logical value whether to return the API response as
+raw, unparsed text. Defaults to \code{FALSE}}
 }
 \description{
 Pull from Competencies Military API endpoint.
 }
 \examples{
 \dontrun{
-c <- competencies_military(moc = "2A554E")
+tkn <- get_access_token(client_id, client_secret)
+c <- competencies_military(moc = "2A554E", token = tkn)
 }
 }

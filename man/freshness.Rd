@@ -4,12 +4,12 @@
 \alias{freshness}
 \title{Pull the freshness tag of the data}
 \usage{
-freshness(token, shush = FALSE)
+freshness(token, handle_status = "warn")
 }
 \arguments{
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{shush}{Logical. Whether to print request status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
 }
 \description{
 Pull the freshness tag of the data

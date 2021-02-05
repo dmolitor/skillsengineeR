@@ -4,23 +4,34 @@
 \alias{topics_related}
 \title{Pull from Related Topics API endpoint.}
 \usage{
-topics_related(texts, socs = NULL, token, shush = FALSE)
+topics_related(
+  texts,
+  socs = NULL,
+  token,
+  handle_status = "warn",
+  response_raw = FALSE
+)
 }
 \arguments{
-\item{texts}{Character Vector. Sentences used to pull related topics.}
+\item{texts}{Character Vector of sentences used to pull related topics}
 
-\item{socs}{Character vector. Soc codes to fine-tune related topics.}
+\item{socs}{Character vector of SOC codes to fine-tune related topics (Optional)}
 
-\item{token}{String. Authorization token.}
+\item{token}{Authorization token obtained from \code{get_access_token}}
 
-\item{shush}{Logical. Print query status.}
+\item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
+
+\item{response_raw}{Logical value whether to return the API response as
+raw, unparsed text. Defaults to \code{FALSE}}
 }
 \description{
 Pull from Related Topics API endpoint.
 }
 \examples{
 \dontrun{
+tkn <- get_access_token(client_id, client_secret)
 t <- topics_related(texts = c("ms word", "access", "dexterity"),
-                    socs = "41-3041.00")
+                    socs = "41-3041.00",
+                    token = tkn)
 }
 }
