@@ -2,6 +2,9 @@
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/dmolitor/skillsengineeR.svg?branch=master)](https://travis-ci.com/dmolitor/skillsengineeR)
+[![codecov](https://codecov.io/gh/dmolitor/skillsengineeR/branch/master/graph/badge.svg)](https://codecov.io/gh/dmolitor/skillsengineeR)
+[![license](https://img.shields.io/badge/license-MIT + file LICENSE-lightgrey.svg)](https://choosealicense.com/)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/skillsengineeR)](https://cran.r-project.org/package=skillsengineeR)
 <!-- badges: end -->
 
 The goal of skillsengineeR is to provide a convenient wrapper around the 
