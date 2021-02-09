@@ -38,7 +38,7 @@ devtools::install_github("https://github.com/dmolitor/skillsengineeR")
   #> Using the following naming convention is necessary for 'get_id_secret()' to work:
   #>  SKILLSENGINE_CLIENT_ID=<client id>
   #>  SKILLSENGINE_CLIENT_SECRET=<client secret>
-  #> * Edit 'C:/Users/DanielMolitor/Documents/.Renviron'
+  #> * Edit 'C:/ ... /.Renviron'
   #> * Restart R for changes to take effect
   #> 
   #> Restart your R Session!
