@@ -4,7 +4,7 @@
 [![Travis build status](https://travis-ci.com/dmolitor/skillsengineeR.svg?branch=master)](https://travis-ci.com/dmolitor/skillsengineeR)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/skillsengineeR)](https://cran.r-project.org/package=skillsengineeR)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/skillsengineeR)](https://cran.r-project.org/package=skillsengineeR)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
