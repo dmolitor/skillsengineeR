@@ -4,7 +4,7 @@
 [![Travis build status](https://travis-ci.com/dmolitor/skillsengineeR.svg?branch=master)](https://travis-ci.com/dmolitor/skillsengineeR)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/skillsengineeR)](https://cran.r-project.org/package=skillsengineeR)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/skillsengineeR)](https://cran.r-project.org/package=skillsengineeR)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
@@ -38,7 +38,7 @@ devtools::install_github("https://github.com/dmolitor/skillsengineeR")
   #> Using the following naming convention is necessary for 'get_id_secret()' to work:
   #>  SKILLSENGINE_CLIENT_ID=<client id>
   #>  SKILLSENGINE_CLIENT_SECRET=<client secret>
-  #> * Edit 'C:/Users/DanielMolitor/Documents/.Renviron'
+  #> * Edit 'C:/ ... /.Renviron'
   #> * Restart R for changes to take effect
   #> 
   #> Restart your R Session!
