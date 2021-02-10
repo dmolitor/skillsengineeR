@@ -27,6 +27,9 @@ competencies_flatten(
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A list of length 11; flattened competency data relevant to query
+}
 \description{
 Pull from Competencies Flatten API endpoint.
 }

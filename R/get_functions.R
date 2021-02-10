@@ -4,6 +4,7 @@
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A data.frame; occupations relevant to query
 #' @export
 occupations <- function(token, 
                         handle_status = "warn",
@@ -34,6 +35,7 @@ occupations <- function(token,
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A data.frame; occupations relevant to query
 #' @examples
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)

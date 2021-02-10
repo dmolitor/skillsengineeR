@@ -39,6 +39,9 @@ competencies_military(
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A list of length 12; military competencies data relevant to query
+}
 \description{
 Pull from Competencies Military API endpoint.
 }

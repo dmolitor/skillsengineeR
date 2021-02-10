@@ -34,6 +34,9 @@ Whether or not to use similarity scoring. (Optional)}
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A list of length 2; skills data relevant to query
+}
 \description{
 Pull from Skills API endpoint.
 }

@@ -6,6 +6,9 @@
 \usage{
 set_id_secret()
 }
+\value{
+No value; called for side effects
+}
 \description{
 Set SkillsEngine Client ID and Client Secret
 }

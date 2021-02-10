@@ -1,5 +1,6 @@
 #' Set SkillsEngine Client ID and Client Secret
-#'
+#' 
+#' @return No value; called for side effects
 #' @export
 set_id_secret <- function(){
   message(
@@ -16,6 +17,7 @@ set_id_secret <- function(){
 
 #' Get SkillsEngine Client ID and Client Secret
 #'
+#' @return List of length 2; Contains Client ID and Secret keys
 #' @export
 get_id_secret <- function(){
   client_id <- Sys.getenv("SKILLSENGINE_CLIENT_ID")
@@ -34,6 +36,7 @@ get_id_secret <- function(){
 #' @param client_id Client ID provided by \code{get_id_secret}, or manually entered
 #' @param client_secret Client Secret provided by \code{get_id_secret}, or manually entered
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @return A string; the Access Token
 #' @export
 get_access_token <- function(client_id,
                              client_secret,

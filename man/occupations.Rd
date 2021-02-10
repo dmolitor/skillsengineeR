@@ -14,6 +14,9 @@ occupations(token, handle_status = "warn", response_raw = FALSE)
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A data.frame; occupations relevant to query
+}
 \description{
 Pull the full list of occupations
 }

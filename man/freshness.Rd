@@ -11,6 +11,9 @@ freshness(token, handle_status = "warn")
 
 \item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
 }
+\value{
+A string; the data freshness tag
+}
 \description{
 Pull the freshness tag of the data
 }

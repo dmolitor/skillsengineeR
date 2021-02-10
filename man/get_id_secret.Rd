@@ -6,6 +6,9 @@
 \usage{
 get_id_secret()
 }
+\value{
+List of length 2; Contains Client ID and Secret keys
+}
 \description{
 Get SkillsEngine Client ID and Client Secret
 }

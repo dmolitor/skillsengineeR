@@ -7,6 +7,7 @@
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A list of length 9; competency data relevant to query
 #' @examples
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)
@@ -68,6 +69,7 @@ competencies <- function(text,
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A list of length 11; flattened competency data relevant to query
 #' @examples
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)
@@ -133,6 +135,7 @@ competencies_flatten <- function(text,
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A list of length 12; military competencies data relevant to query
 #' @examples
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)
@@ -230,6 +233,7 @@ competencies_military <- function(moc,
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A list of length 2; skills data relevant to query
 #' @examples 
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)
@@ -297,6 +301,7 @@ skills <- function(text,
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A list of length 3; skills data relevant to query
 #' @examples 
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)
@@ -363,6 +368,7 @@ skills_multi_match <- function(sentences,
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
 #' @param response_raw Logical value whether to return the API response as
 #'   raw, unparsed text. Defaults to \code{FALSE}
+#' @return A list of length 2; topic modeling data relevant to query
 #' @examples 
 #' \dontrun{
 #' tkn <- get_access_token(client_id, client_secret)

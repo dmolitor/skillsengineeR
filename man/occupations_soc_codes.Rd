@@ -24,6 +24,9 @@ occupations_soc_codes(
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A data.frame; occupations relevant to query
+}
 \description{
 Provide economic data related to user-provided SOC codes (by state)
 }

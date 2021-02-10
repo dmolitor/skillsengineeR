@@ -13,6 +13,9 @@ get_access_token(client_id, client_secret, handle_status = "warn")
 
 \item{handle_status}{How to handle bad HTTP status. Set as either \code{warn} or \code{error}}
 }
+\value{
+A string; the Access Token
+}
 \description{
 Get SkillsEngine Access Token
 }

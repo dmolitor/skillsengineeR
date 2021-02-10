@@ -2,6 +2,7 @@
 #'
 #' @param token Authorization token obtained from \code{get_access_token}
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @return No return value; Prints status to console
 #' @export
 test_access <- function(token, handle_status = "warn"){
   assert(handle_status %in% c("warn", "error"),
@@ -21,6 +22,7 @@ test_access <- function(token, handle_status = "warn"){
 #' 
 #' @param token Authorization token obtained from \code{get_access_token}
 #' @param handle_status How to handle bad HTTP status. Set as either \code{warn} or \code{error}
+#' @return A string; the data freshness tag
 #' @export
 freshness <- function(token, handle_status = "warn"){
   assert(handle_status %in% c("warn", "error"),

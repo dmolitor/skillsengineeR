@@ -27,6 +27,9 @@ competencies(
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A list of length 9; competency data relevant to query
+}
 \description{
 Pull from Competencies API endpoint.
 }

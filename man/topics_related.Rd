@@ -24,6 +24,9 @@ topics_related(
 \item{response_raw}{Logical value whether to return the API response as
 raw, unparsed text. Defaults to \code{FALSE}}
 }
+\value{
+A list of length 2; topic modeling data relevant to query
+}
 \description{
 Pull from Related Topics API endpoint.
 }
