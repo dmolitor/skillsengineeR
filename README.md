@@ -18,7 +18,13 @@ of securely setting up API authorization keys.
 
 ## Installation
 
-You can install skillsengineeR with:
+You can install skillsengineeR CRAN version with
+
+``` r
+install.packages("skillsengineeR")
+```
+
+or from Github with
 
 ``` r
 devtools::install_github("https://github.com/dmolitor/skillsengineeR")
